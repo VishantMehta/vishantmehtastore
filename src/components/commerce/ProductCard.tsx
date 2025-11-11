@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Star, ShoppingCart, Heart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
-import { useWishlist } from "@/hooks/useWishlist";
 import { motion } from "framer-motion";
 
 type ProductCardProps = {
@@ -13,7 +12,6 @@ type ProductCardProps = {
 
 export function ProductCard({ product }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
-  const { toggle, isInWishlist } = useWishlist();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -61,23 +59,9 @@ export function ProductCard({ product }: ProductCardProps) {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onClick={(e) => {
-                e.preventDefault();
-                toggle({
-                  id: product.id,
-                  title: product.title,
-                  slug: product.slug,
-                  price: product.price,
-                  images: product.images,
-                  rating: product.rating,
-                  stock: product.stock,
-                });
-              }}
-              className={`absolute top-3 right-3 p-2 rounded-full bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity ${
-                isInWishlist(product.id) ? "text-red-500" : ""
-              }`}
+              className="absolute top-3 right-3 p-2 rounded-full bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
             >
-              <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? "fill-current" : ""}`} />
+              <Heart className="h-4 w-4" />
             </motion.button>
 
             {/* Quick Add */}
