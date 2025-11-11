@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "name": "Electronics",
+    "slug": "electronics",
+    "image": "/images/hero-banner.jpg",
+    "description": "Cutting-edge technology and gadgets"
+  },
+  {
+    "id": "2",
+    "name": "Fashion",
+    "slug": "fashion",
+    "image": "/images/jacket-1.jpg",
+    "description": "Style and elegance for every occasion"
+  },
+  {
+    "id": "3",
+    "name": "Home & Living",
+    "slug": "home-living",
+    "image": "/images/lamp-1.jpg",
+    "description": "Transform your living space"
+  },
+  {
+    "id": "4",
+    "name": "Sports & Outdoors",
+    "slug": "sports-outdoors",
+    "image": "/images/yoga-mat-1.jpg",
+    "description": "Gear up for your active lifestyle"
+  }
+]

@@ -1,7 +1,8 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ProductCard } from "@/components/commerce/ProductCard";
-import { products, categories } from "@/data/products";
+import { loadProducts, loadCategories } from "@/lib/api";
+import { Product, Category } from "@/types/product";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
@@ -15,13 +16,25 @@ import { motion } from "framer-motion";
 export default function Products() {
   const [searchParams] = useSearchParams();
   const categoryParam = searchParams.get("category");
+  const queryParam = searchParams.get("q");
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [searchQuery, setSearchQuery] = useState(queryParam || "");
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
     categoryParam ? [categoryParam] : []
   );
   const [sortBy, setSortBy] = useState("featured");
+
+  useEffect(() => {
+    loadProducts().then(setProducts);
+    loadCategories().then(setCategories);
+  }, []);
+
+  useEffect(() => {
+    if (queryParam) setSearchQuery(queryParam);
+  }, [queryParam]);
 
   const filteredProducts = useMemo(() => {
     let filtered = products.filter((product) => {
